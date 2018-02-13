@@ -22,10 +22,15 @@ public:
 		return board[index] == Token::empty;
 	}
 
-	void SetToken(enum Token aToken, const unsigned int aRow, const unsigned int aCol) {
+	bool SetToken(enum Token aToken, const unsigned int aRow, const unsigned int aCol) {
+		if (!IsEmpty(aRow, aCol))
+			return false;
+
 		auto index = To1dCoordinate(aRow, aCol);
 		board[index] = aToken;
+		return true;
 	}
+
 private:
 	const unsigned int BOARD_SIZE{ 3 };
 	Token board[9];
@@ -68,6 +73,12 @@ TEST_F(ATTTBoard, IsEmptyForAFieldWithoutTokenReturnsTrue) {
 	board.SetToken(TTTBoard::Token::X, 1, 1);
 
 	ASSERT_TRUE(board.IsEmpty(1, 2));
+}
+
+TEST_F(ATTTBoard, PlacingATokenOnANonEmptyFieldReturnsFalse) {
+	board.SetToken(TTTBoard::Token::X, 1, 1);
+
+	ASSERT_FALSE(board.SetToken(TTTBoard::Token::O, 1, 1));
 }
 
 int main(int argc, char** argv)
