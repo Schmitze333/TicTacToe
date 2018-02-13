@@ -1,0 +1,7 @@
+# .gitignore
+
+.vs/
+**/Debug/
+**/Release/
+**/*.opendb
+**/*.db
