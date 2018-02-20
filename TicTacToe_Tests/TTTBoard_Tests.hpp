@@ -163,3 +163,14 @@ TEST_F(ATTTBoard, DeterminsWinForXWithUpperDiagonal)
 
 	ASSERT_TRUE(board.CheckWinForToken(X));
 }
+
+TEST_F(ATTTBoard, DeterminsWinForXWithLowerDiagonal)
+{
+	board.SetGameState({
+		X, O, X,
+		O, X, O,
+		X, O, O,
+	});
+
+	ASSERT_TRUE(board.CheckWinForToken(X));
+}

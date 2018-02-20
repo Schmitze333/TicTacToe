@@ -36,6 +36,9 @@ private:
 	bool CheckRowNumber(const unsigned int aRow, const Token aToken) const;
 	bool CheckColWinForToken(const Token aToken) const;
 	bool CheckColNumber(const unsigned int aCol, const Token aToken) const;
+	bool CheckDiagonalWinForToken(const Token aToken) const;
+	bool CheckUpperDiagonal(const Token aToken) const;
+	bool CheckLowerDiagonal(const Token aToken) const;
 };
 
 
