@@ -29,6 +29,9 @@
       <Project>{a9311ce9-a4ba-4046-b427-b665500a7eaf}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TTTBoard_Tests.hpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6DBEB094-4EE5-4DD5-BAEE-7358B4872B35}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>

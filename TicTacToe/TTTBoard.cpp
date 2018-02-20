@@ -34,7 +34,12 @@ bool TTTBoard::SetToken(TTTBoard::Token aToken, const unsigned int aRow, const u
 
 bool TTTBoard::SetGameState(std::vector<Token> avTokens)
 {
-	board[0] = Token::X;
+	if (avTokens.size() != FIELDS)
+		return false;
+
+	for (int i{ 0 }; i < FIELDS; ++i) {
+		board[i] = avTokens.at(i);
+	}
 
 	return true;
 }
