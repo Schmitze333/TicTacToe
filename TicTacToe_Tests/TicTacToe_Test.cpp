@@ -2,61 +2,14 @@
 //
 
 #include "gmock/gmock.h"
-
-class TTTBoard
-{
-	bool mbEmpty{ true };
-public:
-	enum Token {
-		empty,
-		X,
-		O,
-	};
-
-	TTTBoard() {
-		EmptyBoard();
-	}
-
-	bool IsEmpty(const unsigned int aRow, const unsigned int aCol) const {
-		auto index = To1dCoordinate(aRow, aCol);
-		return board[index] == Token::empty;
-	}
-
-	bool SetToken(enum Token aToken, const unsigned int aRow, const unsigned int aCol) {
-		if (!IsEmpty(aRow, aCol))
-			return false;
-
-		auto index = To1dCoordinate(aRow, aCol);
-		board[index] = aToken;
-		return true;
-	}
-
-private:
-	const unsigned int BOARD_SIZE{ 3 };
-	Token board[9];
-
-	unsigned int To1dCoordinate(const unsigned int aRow, const unsigned int aCol) const {
-		return (aRow - 1) * BOARD_SIZE + (aCol - 1);
-	}
-
-	void EmptyBoard() {
-		for (int i{ 0 }; i < 9; ++i) {
-			board[i] = Token::empty;
-		}
-	}
-};
-
-/*
-  1 2 3
-1 0 1 2 || (row - 1) * Boardsize + (col - 1)
-2 3 4 5
-3 6 7 8
-*/
+#include "TTTBoard.h"
 
 class ATTTBoard : public ::testing::Test
 {
 public:
 	TTTBoard board;
+	TTTBoard::Token X{ TTTBoard::Token::X };
+	TTTBoard::Token O{ TTTBoard::Token::O };
 };
 
 TEST_F(ATTTBoard, IsEmptyOnCreation) {
@@ -79,6 +32,34 @@ TEST_F(ATTTBoard, PlacingATokenOnANonEmptyFieldReturnsFalse) {
 	board.SetToken(TTTBoard::Token::X, 1, 1);
 
 	ASSERT_FALSE(board.SetToken(TTTBoard::Token::O, 1, 1));
+}
+
+TEST_F(ATTTBoard, IsXForAFieldWithAnXReturnsTrue)
+{
+	board.SetToken(TTTBoard::Token::X, 1, 1);
+
+	ASSERT_TRUE(board.IsX(1, 1));
+}
+
+TEST_F(ATTTBoard, IsOForAFieldWithAnOReturnsTrue)
+{
+	board.SetToken(TTTBoard::Token::O, 1, 1);
+
+	ASSERT_TRUE(board.IsO(1, 1));
+}
+
+TEST_F(ATTTBoard, DISABLED_SettingAWholeBoardConfiguration)
+{
+	board.SetGameState({ X, X, X, O, O, O, O, O, O });
+	EXPECT_TRUE(board.IsX(1, 1));
+	EXPECT_TRUE(board.IsX(1, 2));
+	EXPECT_TRUE(board.IsX(1, 3));
+	EXPECT_TRUE(board.IsO(2, 1));
+	EXPECT_TRUE(board.IsO(2, 2));
+	EXPECT_TRUE(board.IsO(2, 3));
+	EXPECT_TRUE(board.IsO(3, 1));
+	EXPECT_TRUE(board.IsO(3, 2));
+	EXPECT_TRUE(board.IsO(3, 3));
 }
 
 int main(int argc, char** argv)
