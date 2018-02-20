@@ -44,9 +44,9 @@ bool TTTBoard::SetGameState(std::vector<Token> avTokens)
 	return true;
 }
 
-bool TTTBoard::CheckWinForToken(Token aToken) const
+bool TTTBoard::CheckWinForToken(const Token aToken) const
 {
-	return CheckRowWinForToken(aToken);
+	return CheckRowWinForToken(aToken) || CheckColWinForToken(aToken);
 }
 
 bool TTTBoard::CheckRowWinForToken(const Token aToken) const
@@ -67,6 +67,28 @@ bool TTTBoard::CheckRowNumber(const unsigned int aRow, const Token aToken) const
 		has_row = has_row && IsToken(aRow, col, aToken);
 	}
 	return has_row;
+}
+
+bool TTTBoard::CheckColWinForToken(const Token aToken) const
+{
+	bool is_win{ false };
+
+	for (unsigned int col{ 1 }; col <= BOARDSIZE; ++col) {
+		is_win = is_win || CheckColNumber(col, aToken);
+	}
+
+	return is_win;
+}
+
+bool TTTBoard::CheckColNumber(const unsigned int aCol, const Token aToken) const
+{
+	bool has_col{ true };
+
+	for (unsigned int row{ 1 }; row <= BOARDSIZE; ++row) {
+		has_col = has_col && IsToken(row, aCol, aToken);
+	}
+
+	return has_col;
 }
 
 unsigned int TTTBoard::To1dCoordinate(const unsigned int aRow, const unsigned int aCol) const

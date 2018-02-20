@@ -25,7 +25,7 @@ public:
 	bool SetToken(enum Token aToken, const unsigned int aRow, const unsigned int aCol);
 
 	bool SetGameState(std::vector<Token> avTokens);
-	bool CheckWinForToken(Token aToken) const;
+	bool CheckWinForToken(const Token aToken) const;
 
 private:
 	unsigned int To1dCoordinate(const unsigned int aRow, const unsigned int aCol) const;
@@ -34,6 +34,8 @@ private:
 
 	bool CheckRowWinForToken(const Token aToken) const;
 	bool CheckRowNumber(const unsigned int aRow, const Token aToken) const;
+	bool CheckColWinForToken(const Token aToken) const;
+	bool CheckColNumber(const unsigned int aCol, const Token aToken) const;
 };
 
 

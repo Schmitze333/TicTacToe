@@ -119,3 +119,47 @@ TEST_F(ATTTBoard, DeterminsWinForOWith3rdRow)
 
 	ASSERT_TRUE(board.CheckWinForToken(O));
 }
+
+TEST_F(ATTTBoard, DeterminsWinForXWith1stCol)
+{
+	board.SetGameState({
+		X, O, X,
+		X, O, X,
+		X, X, O,
+	});
+
+	ASSERT_TRUE(board.CheckWinForToken(X));
+}
+
+TEST_F(ATTTBoard, DeterminsWinForOWith2ndCol)
+{
+	board.SetGameState({
+		X, O, X,
+		X, O, O,
+		O, O, X,
+	});
+
+	ASSERT_TRUE(board.CheckWinForToken(O));
+}
+
+TEST_F(ATTTBoard, DeterminsWinForXWith3rdCol)
+{
+	board.SetGameState({
+		X, O, X,
+		O, O, X,
+		O, X, X,
+	});
+
+	ASSERT_TRUE(board.CheckWinForToken(X));
+}
+
+TEST_F(ATTTBoard, DeterminsWinForXWithUpperDiagonal)
+{
+	board.SetGameState({
+		X, O, X,
+		O, X, O,
+		O, X, X,
+	});
+
+	ASSERT_TRUE(board.CheckWinForToken(X));
+}
