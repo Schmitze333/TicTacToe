@@ -25,11 +25,15 @@ public:
 	bool SetToken(enum Token aToken, const unsigned int aRow, const unsigned int aCol);
 
 	bool SetGameState(std::vector<Token> avTokens);
+	bool CheckWinForToken(Token aToken) const;
 
 private:
 	unsigned int To1dCoordinate(const unsigned int aRow, const unsigned int aCol) const;
 	bool IsToken(const unsigned int aRow, const unsigned int aCol, Token aToken) const;
 	void EmptyBoard();
+
+	bool CheckRowWinForToken(const Token aToken) const;
+	bool CheckRowNumber(const unsigned int aRow, const Token aToken) const;
 };
 
 

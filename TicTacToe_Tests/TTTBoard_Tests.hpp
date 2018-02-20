@@ -64,3 +64,58 @@ TEST_F(ATTTBoard, SetGameStateReturnsFalseForVectorsWithInappropiateSize)
 {
 	ASSERT_FALSE(board.SetGameState({ X, O }));
 }
+
+TEST_F(ATTTBoard, DeterminsANonWinSituation)
+{
+	board.SetGameState( {
+		X, O, X,
+		O, X, O,
+		O, X, O
+	} );
+
+	ASSERT_FALSE(board.CheckWinForToken(X));
+}
+
+TEST_F(ATTTBoard, DeterminsWinForXWith1stRow)
+{
+	board.SetGameState({
+		X, X, X,
+		X, O, O,
+		O, X, O
+	});
+
+	ASSERT_TRUE(board.CheckWinForToken(X));
+}
+
+TEST_F(ATTTBoard, DeterminsWinForXWith2ndRow)
+{
+	board.SetGameState({
+		X, O, O,
+		X, X, X,
+		O, X, O
+	});
+
+	ASSERT_TRUE(board.CheckWinForToken(X));
+}
+
+TEST_F(ATTTBoard, DeterminsWinForOWith1stRow)
+{
+	board.SetGameState({
+		O, O, O,
+		X, O, X,
+		O, X, X
+	});
+
+	ASSERT_TRUE(board.CheckWinForToken(O));
+}
+
+TEST_F(ATTTBoard, DeterminsWinForOWith3rdRow)
+{
+	board.SetGameState({
+		X, O, X,
+		O, X, X,
+		O, O, O,
+	});
+
+	ASSERT_TRUE(board.CheckWinForToken(O));
+}
