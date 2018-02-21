@@ -6,3 +6,4 @@
 **/*.opendb
 **/*.db
 TicTacToe_Tests/TicTacToe_Tests.vcxproj.user
+build/
