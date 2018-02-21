@@ -50,9 +50,6 @@ public:
 	std::string Draw() const;
 
 private:
-	std::string DrawHeader() const;
-	std::string DrawRow(const unsigned int aRowNumber) const;
-	std::string DrawTokenAt(const unsigned int aRowNumber, const unsigned int aColNumber) const;
 	unsigned int To1dCoordinate(const unsigned int aRow, const unsigned int aCol) const;
 	void EmptyBoard();
 };
