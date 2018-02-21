@@ -18,9 +18,15 @@
     <ClInclude Include="TTTBoard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TTTChecker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TTTBoard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TTTChecker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

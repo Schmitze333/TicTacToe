@@ -20,9 +20,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TTTBoard.h" />
+    <ClInclude Include="TTTChecker.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TTTBoard.cpp" />
+    <ClCompile Include="TTTChecker.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{A9311CE9-A4BA-4046-B427-B665500A7EAF}</ProjectGuid>

@@ -1,6 +1,7 @@
 #include "gmock\gmock.h"
 
 #include "TTTBoard.h"
+#include "TTTChecker.h"
 
 class ATTTBoard : public ::testing::Test
 {
@@ -8,6 +9,10 @@ public:
 	TTTBoard board;
 	TTTBoard::Token X{ TTTBoard::Token::X };
 	TTTBoard::Token O{ TTTBoard::Token::O };
+
+	void SetUp() {
+		board.SetWinChecker(std::make_unique<TTTChecker>(&board));
+	}
 };
 
 TEST_F(ATTTBoard, IsEmptyOnCreation) {
