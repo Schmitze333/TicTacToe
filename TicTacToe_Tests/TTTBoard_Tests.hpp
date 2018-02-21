@@ -12,6 +12,7 @@ public:
 	TTTBoard board;
 	TTTBoard::Token X{ TTTBoard::Token::X };
 	TTTBoard::Token O{ TTTBoard::Token::O };
+	TTTBoard::Token E{ TTTBoard::Token::empty };
 
 	void SetUp() {
 		board.SetWinChecker(std::make_unique<TTTChecker>(&board));
@@ -207,4 +208,26 @@ TEST_F(ATTTBoard, DrawingABoardWithAToken)
 	};
 
 	ASSERT_THAT(board.Draw(), Eq(expected));
+}
+
+TEST_F(ATTTBoard, IsFullReturnsTrueForACompletelyFullBoard)
+{
+	board.SetGameState({
+		X, O, X,
+		O, X, X,
+		O, X, O
+	});
+
+	ASSERT_TRUE(board.IsFull());
+}
+
+TEST_F(ATTTBoard, IsFullReturnsFalseForANonFullBoard)
+{
+	board.SetGameState({
+		X, E, X,
+		O, E, E,
+		E, X, E
+	});
+
+	ASSERT_FALSE(board.IsFull());
 }

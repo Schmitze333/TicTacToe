@@ -36,6 +36,7 @@ public:
 	std::string TokenSymbolAt(const unsigned int aRow, const unsigned int aCol) const;
 
 	bool IsEmpty(const unsigned int aRow, const unsigned int aCol) const; 
+	bool IsFull() const;
 	bool IsX(const unsigned int aRow, const unsigned int aCol) const;
 	bool IsO(const unsigned int aRow, const unsigned int aCol) const;
 	bool IsToken(const unsigned int aRow, const unsigned int aCol, Token aToken) const;

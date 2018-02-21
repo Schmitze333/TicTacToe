@@ -24,6 +24,16 @@ bool TTTBoard::IsEmpty(const unsigned int aRow, const unsigned int aCol) const
 	return board[index] == Token::empty;
 }
 
+bool TTTBoard::IsFull() const
+{
+	for (unsigned int i{ 0 }; i < FIELDS; ++i) {
+		if (board[i] == Token::empty)
+			return false;
+	}
+
+	return true;
+}
+
 bool TTTBoard::IsX(const unsigned int aRow, const unsigned int aCol) const
 {
 	return IsToken(aRow, aCol, Token::X);
