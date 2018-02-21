@@ -1,9 +1,12 @@
 #pragma once
 
 #include <vector>
+#include <unordered_map>
 #include <memory>
 
 class WinChecker;
+class DrawStrategy;
+
 class TTTBoard
 {
 	enum Token;
@@ -12,6 +15,7 @@ class TTTBoard
 	const unsigned int FIELDS{ BOARDSIZE * BOARDSIZE };
 	Token board[BOARDSIZE * BOARDSIZE];
 	std::unique_ptr<WinChecker> checker{ nullptr };
+	std::unique_ptr<DrawStrategy> drawer{ nullptr };
 
 public:
 	enum Token {
@@ -20,7 +24,16 @@ public:
 		O,
 	};
 
+	const std::unordered_map<Token, std::string> TOKEN_SYMBOLS{
+		{empty, "-"},
+		{X, "X"},
+		{O, "O"}
+	};
+
 	TTTBoard() { EmptyBoard(); }
+
+	Token TokenAt(const unsigned int aRow, const unsigned int aCol) const;
+	std::string TokenSymbolAt(const unsigned int aRow, const unsigned int aCol) const;
 
 	bool IsEmpty(const unsigned int aRow, const unsigned int aCol) const; 
 	bool IsX(const unsigned int aRow, const unsigned int aCol) const;
@@ -32,8 +45,14 @@ public:
 	bool CheckWinForToken(const Token aToken) const;
 	unsigned int getBoardSize() const { return BOARDSIZE; }
 	void SetWinChecker(std::unique_ptr<WinChecker> apChecker) { checker = std::move(apChecker); }
+	void SetDrawStrategy(std::unique_ptr<DrawStrategy> apDrawer) { drawer = std::move(apDrawer); }
+
+	std::string Draw() const;
 
 private:
+	std::string DrawHeader() const;
+	std::string DrawRow(const unsigned int aRowNumber) const;
+	std::string DrawTokenAt(const unsigned int aRowNumber, const unsigned int aColNumber) const;
 	unsigned int To1dCoordinate(const unsigned int aRow, const unsigned int aCol) const;
 	void EmptyBoard();
 };
@@ -42,6 +61,12 @@ class WinChecker
 {
 public:
 	virtual bool CheckWinForToken(const TTTBoard::Token) const = 0;
+};
+
+class DrawStrategy
+{
+public:
+	virtual std::string Draw() const = 0;
 };
 
 

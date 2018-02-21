@@ -2,6 +2,9 @@
 
 #include "TTTBoard.h"
 #include "TTTChecker.h"
+#include "TTTDrawer.h"
+
+using ::testing::Eq;
 
 class ATTTBoard : public ::testing::Test
 {
@@ -12,6 +15,7 @@ public:
 
 	void SetUp() {
 		board.SetWinChecker(std::make_unique<TTTChecker>(&board));
+		board.SetDrawStrategy(std::make_unique<TTTDrawer>(&board));
 	}
 };
 
@@ -20,33 +24,33 @@ TEST_F(ATTTBoard, IsEmptyOnCreation) {
 }
 
 TEST_F(ATTTBoard, IsEmptyForAFieldWithTokenReturnsFalse) {
-	board.SetToken(TTTBoard::Token::X, 1, 1);
+	board.SetToken(X, 1, 1);
 
 	ASSERT_FALSE(board.IsEmpty(1, 1));
 }
 
 TEST_F(ATTTBoard, IsEmptyForAFieldWithoutTokenReturnsTrue) {
-	board.SetToken(TTTBoard::Token::X, 1, 1);
+	board.SetToken(X, 1, 1);
 
 	ASSERT_TRUE(board.IsEmpty(1, 2));
 }
 
 TEST_F(ATTTBoard, PlacingATokenOnANonEmptyFieldReturnsFalse) {
-	board.SetToken(TTTBoard::Token::X, 1, 1);
+	board.SetToken(X, 1, 1);
 
-	ASSERT_FALSE(board.SetToken(TTTBoard::Token::O, 1, 1));
+	ASSERT_FALSE(board.SetToken(O, 1, 1));
 }
 
 TEST_F(ATTTBoard, IsXForAFieldWithAnXReturnsTrue)
 {
-	board.SetToken(TTTBoard::Token::X, 1, 1);
+	board.SetToken(X, 1, 1);
 
 	ASSERT_TRUE(board.IsX(1, 1));
 }
 
 TEST_F(ATTTBoard, IsOForAFieldWithAnOReturnsTrue)
 {
-	board.SetToken(TTTBoard::Token::O, 1, 1);
+	board.SetToken(O, 1, 1);
 
 	ASSERT_TRUE(board.IsO(1, 1));
 }
@@ -178,4 +182,29 @@ TEST_F(ATTTBoard, DeterminsWinForXWithLowerDiagonal)
 	});
 
 	ASSERT_TRUE(board.CheckWinForToken(X));
+}
+
+TEST_F(ATTTBoard, DrawingAnEmptyBoard)
+{
+	std::string expected{
+		"_|1_2_3\n"
+		"1|- - -\n"
+		"2|- - -\n"
+		"3|- - -\n"
+	};
+
+	ASSERT_THAT(board.Draw(), Eq(expected));
+}
+
+TEST_F(ATTTBoard, DrawingABoardWithAToken)
+{
+	board.SetToken(X, 1, 1);
+	std::string expected{
+		"_|1_2_3\n"
+		"1|X - -\n"
+		"2|- - -\n"
+		"3|- - -\n"
+	};
+
+	ASSERT_THAT(board.Draw(), Eq(expected));
 }
