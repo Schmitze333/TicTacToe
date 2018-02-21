@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include <unordered_map>
+#include <map>
 #include <memory>
 
 class WinChecker;
@@ -9,14 +9,6 @@ class DrawStrategy;
 
 class TTTBoard
 {
-	enum Token;
-
-	enum { BOARDSIZE = 3 };
-	const unsigned int FIELDS{ BOARDSIZE * BOARDSIZE };
-	Token board[BOARDSIZE * BOARDSIZE];
-	std::unique_ptr<WinChecker> checker{ nullptr };
-	std::unique_ptr<DrawStrategy> drawer{ nullptr };
-
 public:
 	enum Token {
 		empty,
@@ -24,7 +16,15 @@ public:
 		O,
 	};
 
-	const std::unordered_map<Token, std::string> TOKEN_SYMBOLS{
+private:
+	enum { BOARDSIZE = 3 };
+	const unsigned int FIELDS{ BOARDSIZE * BOARDSIZE };
+  Token board[BOARDSIZE * BOARDSIZE];
+	std::unique_ptr<WinChecker> checker{ nullptr };
+	std::unique_ptr<DrawStrategy> drawer{ nullptr };
+
+public:
+	const std::map<Token, std::string> TOKEN_SYMBOLS{
 		{empty, "-"},
 		{X, "X"},
 		{O, "O"}

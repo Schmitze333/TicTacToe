@@ -1,4 +1,4 @@
-#include "gmock\gmock.h"
+#include "gmock/gmock.h"
 
 #include "TTTBoard.h"
 #include "TTTChecker.h"

@@ -65,7 +65,7 @@ bool TTTBoard::SetGameState(std::vector<Token> avTokens)
 	if (avTokens.size() != FIELDS)
 		return false;
 
-	for (int i{ 0 }; i < FIELDS; ++i) {
+	for (unsigned int i{ 0 }; i < FIELDS; ++i) {
 		board[i] = avTokens.at(i);
 	}
 
@@ -100,7 +100,7 @@ unsigned int TTTBoard::To1dCoordinate(const unsigned int aRow, const unsigned in
 
 void TTTBoard::EmptyBoard()
 {
-	for (int i{ 0 }; i < FIELDS; ++i) {
+	for (unsigned int i{ 0 }; i < FIELDS; ++i) {
 		board[i] = Token::empty;
 	}
 }
