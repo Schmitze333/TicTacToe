@@ -4,7 +4,7 @@ project(TicTacToe)
 include_directories(
   $ENV{GTEST_HOME}/googlemock/include 
   $ENV{GTEST_HOME}/googletest/include
-  ./TicTacToe
+  ./TicTacToe/header
   ./TicTacToe_Tests
   ./TicTacToeGame
 )
@@ -21,9 +21,10 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -ggdb -Wall")
 
 
 set(lib_sources
-  TicTacToe/TTTBoard.cpp
-  TicTacToe/TTTChecker.cpp
-  TicTacToe/TTTDrawer.cpp
+  TicTacToe/sources/TTTBoard.cpp
+  TicTacToe/sources/TTTChecker.cpp
+  TicTacToe/sources/TTTDrawer.cpp
+  TicTacToe/sources/TTTBot.cpp
 )
 
 set(test_sources
