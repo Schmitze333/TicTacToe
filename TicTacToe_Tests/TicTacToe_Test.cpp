@@ -4,6 +4,7 @@
 #include "gmock/gmock.h"
 
 #include "TTTBoard_Tests.hpp"
+#include "TTTBot_Test.hpp"
 
 int main(int argc, char** argv)
 {
