@@ -70,6 +70,19 @@ TEST_F(ATTTBoard, SettingAWholeBoardConfiguration)
 	EXPECT_TRUE(board.IsO(3, 3));
 }
 
+TEST_F(ATTTBoard, GetGameStateReturnsGameConfiguration)
+{
+  std::vector<TTTBoard::Token> gameState({
+      X, X, X,
+      O, O, O,
+      X, X, X
+      });
+
+  board.SetGameState(gameState);
+
+  ASSERT_THAT(board.GetGameState(), Eq(gameState));
+}
+
 TEST_F(ATTTBoard, SetGameStateReturnsFalseForVectorsWithInappropiateSize)
 {
 	ASSERT_FALSE(board.SetGameState({ X, O }));

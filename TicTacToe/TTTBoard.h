@@ -43,6 +43,7 @@ public:
 	bool SetToken(enum Token aToken, const unsigned int aRow, const unsigned int aCol);
 
 	bool SetGameState(std::vector<Token> avTokens);
+  std::vector<Token> GetGameState() const;
 	bool CheckWinForToken(const Token aToken) const;
 	unsigned int getBoardSize() const { return BOARDSIZE; }
 	void SetWinChecker(std::unique_ptr<WinChecker> apChecker) { checker = std::move(apChecker); }

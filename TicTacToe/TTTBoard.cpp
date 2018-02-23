@@ -72,6 +72,14 @@ bool TTTBoard::SetGameState(std::vector<Token> avTokens)
 	return true;
 }
 
+std::vector<TTTBoard::Token> TTTBoard::GetGameState() const
+{
+  std::vector<TTTBoard::Token> out;
+  out.assign(board, board + FIELDS);
+
+  return out;
+}
+
 bool TTTBoard::CheckWinForToken(const Token aToken) const
 {
 	if (!checker) return false;
